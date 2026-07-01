@@ -113,6 +113,11 @@ export class DownloadEngine {
     xhr.open('GET', `${downloadUrl}?n=${Math.random()}`, true);
     xhr.responseType = 'arraybuffer';
 
+    // Prevent caching on both client browser and intermediate proxies/CDNs
+    xhr.setRequestHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+    xhr.setRequestHeader('Pragma', 'no-cache');
+    xhr.setRequestHeader('Expires', '0');
+
     xhr.onprogress = (e: ProgressEvent) => {
       if (this.stopped) {
         xhr.abort();
