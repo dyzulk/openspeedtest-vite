@@ -1,0 +1,469 @@
+/* ===================================================================
+   style.css
+   Unified stylesheet for OpenSpeedTest (Vite + TypeScript).
+   Combines app.css + darkmode.css with CSS Custom Properties.
+   =================================================================== */
+
+/* -------------------------------------------------------------------
+   Fonts: Roboto (latin, regular + 500)
+   Only woff2 and woff for modern browsers.
+   ------------------------------------------------------------------- */
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src:
+    url('./assets/fonts/roboto-v30-latin-regular.woff2') format('woff2'),
+    url('./assets/fonts/roboto-v30-latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src:
+    url('./assets/fonts/roboto-v30-latin-500.woff2') format('woff2'),
+    url('./assets/fonts/roboto-v30-latin-500.woff') format('woff');
+}
+
+/* -------------------------------------------------------------------
+   CSS Custom Properties (Light theme defaults)
+   ------------------------------------------------------------------- */
+
+:root {
+  --color-bg: #ffffff;
+  --color-text: #201e1e;
+  --color-text-secondary: #5f5f5f;
+  --color-text-muted: #333;
+  --color-card: #f2f2f2;
+  --color-gauge-bg: rgb(231, 231, 232);
+  --color-gauge-white: rgb(255, 255, 255);
+  --color-ui-bg: #d2d1d2;
+  --color-progress-bg: rgb(231, 231, 232);
+  --color-accent: #14b0fe;
+  --color-error-fill: #000000;
+  --color-credits: rgb(125, 119, 119);
+  --color-credits-link: rgb(113, 113, 113);
+  --color-ip: #201e1e;
+  --color-jitter-mob: #5f5f5f;
+}
+
+/* -------------------------------------------------------------------
+   Dark theme via system preference or manual class toggle
+   ------------------------------------------------------------------- */
+
+@media (prefers-color-scheme: dark) {
+  :root:not(.light-theme) {
+    --color-bg: #181818;
+    --color-text: #ffffff;
+    --color-text-secondary: #ffffff;
+    --color-text-muted: #ffffff;
+    --color-card: #000000;
+    --color-gauge-bg: #000000;
+    --color-ui-bg: #000000;
+    --color-progress-bg: #202020;
+    --color-error-fill: #ffffff;
+    --color-ip: aliceblue;
+    --color-jitter-mob: #ffffff;
+  }
+}
+
+.dark-theme {
+  --color-bg: #181818;
+  --color-text: #ffffff;
+  --color-text-secondary: #ffffff;
+  --color-text-muted: #ffffff;
+  --color-card: #000000;
+  --color-gauge-bg: #000000;
+  --color-ui-bg: #000000;
+  --color-progress-bg: #202020;
+  --color-error-fill: #ffffff;
+  --color-ip: aliceblue;
+  --color-jitter-mob: #ffffff;
+}
+
+/* -------------------------------------------------------------------
+   Base reset
+   ------------------------------------------------------------------- */
+
+body {
+  margin: 0;
+  padding: 0;
+  display: block;
+  background-color: var(--color-bg);
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* -------------------------------------------------------------------
+   Credits footer
+   ------------------------------------------------------------------- */
+
+.Credits {
+  color: var(--color-credits);
+  text-align: center;
+  font-size: 14px;
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.Credits a {
+  text-decoration: none;
+  color: var(--color-credits-link);
+}
+
+.Credits a:hover {
+  color: var(--color-accent);
+}
+
+/* -------------------------------------------------------------------
+   SVG UI classes
+   ------------------------------------------------------------------- */
+
+.ConnectError {
+  display: none;
+  fill: var(--color-error-fill);
+}
+
+.openSpeedtestApp {
+  height: 100vh;
+  width: 100vw;
+  display: none;
+  overflow: hidden;
+}
+
+/* Gauge arcs */
+.main-Gaugebg {
+  fill: none;
+  stroke: var(--color-gauge-bg);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 22px;
+  stroke-dasharray: 681;
+}
+
+.main-GaugeBlue {
+  fill: none;
+  stroke: url(#gradient);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 22px;
+  stroke-dasharray: 681;
+  stroke-opacity: 0;
+}
+
+.main-GaugeWhite {
+  fill: none;
+  stroke: var(--color-gauge-white);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 15px;
+  stroke-dasharray: 0, 681;
+  stroke-dashoffset: 1;
+  stroke-opacity: 0;
+}
+
+/* Odometer text */
+.oDo-Meter {
+  font-size: 16.633283615112305px;
+  fill: gray;
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.oDoLive-Speed {
+  font-size: 28px;
+  fill: var(--color-text);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.oDoLive-Status {
+  font-size: 10px;
+  fill: var(--color-ui-bg);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.uiBg {
+  fill: var(--color-ui-bg);
+}
+
+/* Progress bar */
+.progressbg {
+  stroke: var(--color-progress-bg);
+  stroke-width: 8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+}
+
+/* Result cards */
+.Cards {
+  fill: var(--color-card);
+}
+
+.Symbol {
+  fill: url(#gradient);
+}
+
+.rtext {
+  font-size: 12px;
+  fill: var(--color-text-muted);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+}
+
+.rtextnum {
+  font-size: 23px;
+  fill: var(--color-text);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.rtextmbms {
+  font-size: 12px;
+  fill: var(--color-text-secondary);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+.jitter-Mob {
+  font-size: 9px;
+  fill: var(--color-jitter-mob);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+/* Start button */
+.startButton {
+  fill: url(#RadialGradient1);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  pointer-events: visible;
+}
+
+.buttonTxt {
+  font-size: 40px;
+  fill: #ffffff;
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+}
+
+/* Progress intro */
+.intro-Progress {
+  stroke: #56c4fb;
+  stroke-width: 8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+}
+
+.progressElmstart {
+  stroke: #56c4fb;
+  stroke-width: 8px;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 0;
+  display: block;
+}
+
+/* Settings gear */
+.Startsettings {
+  fill: url(#RadialGradient1);
+  -webkit-tap-highlight-color: transparent;
+  cursor: pointer;
+  pointer-events: visible;
+  opacity: 0.1;
+  transition: opacity 1s ease-in-out;
+}
+
+.Startsettings:hover {
+  opacity: 1;
+}
+
+.deskStart {
+  fill: none;
+  stroke: var(--color-gauge-bg);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  stroke-width: 22px;
+  stroke-dasharray: 681;
+  stroke: url(#gradient);
+}
+
+/* UI panels -- hidden by default, shown via JS */
+#UI-Desk {
+  display: none;
+}
+
+#UI-Mob {
+  display: none;
+}
+
+.oDoTop-Speed {
+  font-size: 16.96px;
+  fill: gray;
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: end;
+}
+
+/* Direction symbols */
+#upSymbolDesk {
+  fill: var(--color-accent);
+  display: none;
+}
+
+#downSymbolDesk {
+  fill: var(--color-accent);
+  display: none;
+}
+
+#upSymbolMob {
+  fill: var(--color-accent);
+  display: none;
+}
+
+#downSymbolMob {
+  fill: var(--color-accent);
+  display: none;
+}
+
+/* IP display */
+#ipMob {
+  font-size: 15px;
+  fill: var(--color-ip);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+  display: none;
+}
+
+#ipDesk {
+  font-size: 15px;
+  fill: var(--color-ip);
+  font-family: Roboto-Medium, Roboto, sans-serif;
+  font-weight: 500;
+  text-anchor: middle;
+  display: none;
+}
+
+/* -------------------------------------------------------------------
+   Loading spinner
+   ------------------------------------------------------------------- */
+
+.spinner {
+  position: absolute;
+  z-index: 999;
+  top: 50vh;
+  left: 50vw;
+  text-align: center;
+}
+
+.spinner > div {
+  width: 20px;
+  height: 20px;
+  background-color: #2196f3;
+  border-radius: 100%;
+  display: inline-block;
+  animation: sk-bouncedelay 1.4s infinite ease-in-out both;
+}
+
+.spinner .bounce1 {
+  animation-delay: -0.32s;
+}
+
+.spinner .bounce2 {
+  animation-delay: -0.16s;
+}
+
+@keyframes sk-bouncedelay {
+  0%,
+  80%,
+  100% {
+    transform: scale(0);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+/* -------------------------------------------------------------------
+   Dark mode toggle buttons
+   ------------------------------------------------------------------- */
+
+.darkmode {
+  margin-bottom: -15px;
+  fill: #75757a99;
+  padding-top: 16px;
+  display: none;
+  cursor: pointer;
+  margin-right: 30px;
+}
+
+#daymode {
+  margin-right: 40px;
+}
+
+.darkmode:hover {
+  fill: #000000;
+}
+
+/* -------------------------------------------------------------------
+   Responsive: Desktop (landscape) / Mobile (portrait)
+   ------------------------------------------------------------------- */
+
+.Mobile,
+.Desktop {
+  visibility: hidden;
+  width: 100vw;
+  height: 100vh;
+}
+
+@media only screen and (orientation: landscape) {
+  .Mobile {
+    visibility: hidden;
+  }
+  .Desktop {
+    visibility: visible;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .spinner {
+    top: 42vh;
+    left: 42vw;
+  }
+  .Mobile {
+    visibility: visible;
+  }
+  .Desktop {
+    visibility: hidden;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .Credits {
+    display: none;
+  }
+}
