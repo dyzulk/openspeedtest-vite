@@ -197,7 +197,7 @@ export class UploadEngine {
     this.uTotal += uLoad;
 
     // Delta time since last update
-    const utLoad = this.utDiff === 0 ? 0 : elapsedMs - this.utDiff;
+    const utLoad = elapsedMs - this.utDiff;
     this.utDiff = elapsedMs;
     this.utTotal += utLoad;
 

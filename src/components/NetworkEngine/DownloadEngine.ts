@@ -182,7 +182,7 @@ export class DownloadEngine {
     this.dTotal += dLoad;
 
     // Delta time since last update
-    const dtLoad = this.dtDiff === 0 ? 0 : elapsedMs - this.dtDiff;
+    const dtLoad = elapsedMs - this.dtDiff;
     this.dtDiff = elapsedMs;
     this.dtTotal += dtLoad;
 
