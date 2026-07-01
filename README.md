@@ -157,6 +157,41 @@ https://your-server.com/?host=https://speedtest.example.com&p=20
 
 ---
 
+## Configuration & Customization (Vite Edition)
+
+This modernized version separates configuration into default settings defined in the source code and dynamic parameters parsed from the URL bar.
+
+### 1. Modifying Defaults (In-Code)
+
+You can customize permanent default values by editing the `DEFAULT_CONFIG` object in [src/utils/config.ts](file:///src/utils/config.ts):
+
+*   **`openSpeedTestServerList`**: List of server URLs.
+*   **`saveData`**: Set to `true` to save results.
+*   **`saveDataURL`**: Endpoint for saving results.
+*   **`pingSamples`**: Number of ping samples.
+*   **`pingTimeOut`**: Latency check timeout (ms).
+*   **`dlDuration` / `ulDuration`**: Test duration (seconds).
+*   **`dlThreads` / `ulThreads`**: Number of parallel threads.
+
+### 2. Master Switches
+
+For security or policy compliance, you can lock down user customizations by setting the following boolean flags in `DEFAULT_CONFIG` to `false`:
+
+*   **`setHTTPReq`**: If `false`, disables custom thread overrides (`xhr`/`x`).
+*   **`selectServer`**: If `false`, disables custom host overrides (`host`/`h`).
+*   **`stressTest`**: If `false`, disables custom stress testing (`stress`/`s`).
+*   **`enableClean`**: If `false`, disables custom overhead compensation (`clean`/`c`).
+*   **`setPingSamples`**: If `false`, disables custom ping sample overrides (`ping`/`p`).
+*   **`setPingTimeout`**: If `false`, disables custom ping timeout overrides (`out`/`o`).
+
+### 3. Docker Environment Variables
+
+> [!WARNING]
+> This repository is a static frontend-only project and **does not contain any Docker files** (no `Dockerfile` or `docker-compose.yml`).
+> Any environment variables mentioned in the original README (e.g., `ENABLE_LETSENCRYPT`, `HTTP_PORT`, `SET_SERVER_NAME`) are processed externally by the Nginx container wrapper in the official OpenSpeedTest Docker image, not by this codebase.
+
+---
+
 ## Styling and Theming
 
 The application uses CSS Custom Properties defined in `src/style.css`. Dark mode activates automatically via `prefers-color-scheme: dark`, or manually by adding the `dark-theme` class to the root element.
