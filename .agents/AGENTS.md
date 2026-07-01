@@ -34,20 +34,22 @@ Here is the target file structure after the migration is complete compared to th
 openspeedtest-vite/
 ├── .agents/
 │   └── AGENTS.md                          <-- This rules file
-├── openspeedtest-ref/                     <-- Reference Git Worktree (Original)
-│   ├── index.html
-│   └── assets/
-│       ├── css/
-│       │   ├── app.css
-│       │   └── darkmode.css
-│       ├── fonts/
-│       │   └── roboto-v30-latin-...
-│       ├── images/
-│       │   ├── app.svg
-│       │   └── icons/
-│       └── js/
-│           ├── app-2.5.4.js
-│           └── darkmode.js
+├── references/                            <-- External References (Git Submodules)
+│   ├── openspeedtest-docker-ref/          <-- Official Docker repository
+│   └── openspeedtest-ref/                 <-- Official Speed-Test repository
+│       ├── index.html
+│       └── assets/
+│           ├── css/
+│           │   ├── app.css
+│           │   └── darkmode.css
+│           ├── fonts/
+│           │   └── roboto-v30-latin-...
+│           ├── images/
+│           │   ├── app.svg
+│           │   └── icons/
+│           └── js/
+│               ├── app-2.5.4.js
+│               └── darkmode.js
 ├── public/                                <-- Static Assets for Root Server
 │   ├── browserconfig.xml
 │   ├── favicon.ico

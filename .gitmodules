@@ -1,0 +1,6 @@
+[submodule "openspeedtest-ref"]
+	path = references/openspeedtest-ref
+	url = https://github.com/openspeedtest/Speed-Test.git
+[submodule "openspeedtest-docker-ref"]
+	path = references/openspeedtest-docker-ref
+	url = https://github.com/openspeedtest/Docker-Image.git
