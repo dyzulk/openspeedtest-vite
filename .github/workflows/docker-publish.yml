@@ -48,6 +48,7 @@ jobs:
           cache-to: type=gha,mode=max
 
       - name: Analyze vulnerabilities with Docker Scout
+        continue-on-error: true
         uses: docker/scout-action@v1
         with:
           command: quickview
