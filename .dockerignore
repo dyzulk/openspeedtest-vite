@@ -1,0 +1,25 @@
+# Ignore node modules and local build outputs
+node_modules/
+dist/
+
+# Ignore Rust build artifacts
+docker/server-rust/target/
+
+# Ignore Git directory and config files
+.git/
+.gitignore
+.gitattributes
+.gitmodules
+
+# Ignore IDE config files
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Ignore documentation and agent configurations
+*.md
+.agents/

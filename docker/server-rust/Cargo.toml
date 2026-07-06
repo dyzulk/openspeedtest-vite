@@ -1,0 +1,11 @@
+[package]
+name = "openspeedtest-rust"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+tokio = { version = "1.35", features = ["full"] }
+axum = { version = "0.7" }
+tower-http = { version = "0.5", features = ["fs"] }
+bytes = "1.5"
+http-body-util = "0.1"

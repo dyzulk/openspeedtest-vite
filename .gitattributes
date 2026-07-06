@@ -1,0 +1,9 @@
+# Exclude development, docker, and references directories from exported ZIP files
+.github/          export-ignore
+.agents/          export-ignore
+references/       export-ignore
+docker/           export-ignore
+docker-compose.yml export-ignore
+.gitattributes    export-ignore
+.gitignore        export-ignore
+.gitmodules       export-ignore
