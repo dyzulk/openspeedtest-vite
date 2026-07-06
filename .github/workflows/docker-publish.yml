@@ -51,4 +51,4 @@ jobs:
         uses: docker/scout-action@v1
         with:
           command: quickview
-          image: ${{ steps.meta.outputs.tags }}
+          image: ${{ secrets.DOCKER_USERNAME }}/openspeedtest-vite:${{ steps.meta.outputs.version }}
