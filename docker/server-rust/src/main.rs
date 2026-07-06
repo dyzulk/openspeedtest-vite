@@ -4,7 +4,7 @@ use axum::{
     http::{header, HeaderValue, Method, StatusCode},
     middleware::{self, Next},
     response::{IntoResponse, Response},
-    routing::post,
+    routing::any,
     Router,
 };
 use http_body_util::BodyExt;
@@ -17,7 +17,11 @@ async fn custom_headers_middleware(req: Request, next: Next) -> Response {
     let path = req.uri().path().to_owned();
     let method = req.method().clone();
     
+    println!("--> HTTP REQUEST: {} {}", method, path);
+    
     let mut response = next.run(req).await;
+    
+    println!("<-- HTTP RESPONSE: {} for {} {}", response.status(), method, path);
     let headers = response.headers_mut();
 
     // 1. Inject CORS headers required for OpenSpeedTest
@@ -68,9 +72,9 @@ async fn upload_handler(mut body: Body) -> impl IntoResponse {
 #[tokio::main]
 async fn main() {
     let app = Router::new()
-        // Handle POST requests to /upload or /speedtest/upload
-        .route("/upload", post(upload_handler))
-        .route("/speedtest/upload", post(upload_handler))
+        // Handle requests to /upload or /speedtest/upload for any HTTP method
+        .route("/upload", any(upload_handler))
+        .route("/speedtest/upload", any(upload_handler))
         // Fallback to serving Vite static assets
         .fallback_service(ServeDir::new("/usr/share/nginx/html"))
         // Apply custom headers middleware

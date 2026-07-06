@@ -184,11 +184,21 @@ For security or policy compliance, you can lock down user customizations by sett
 *   **`setPingSamples`**: If `false`, disables custom ping sample overrides (`ping`/`p`).
 *   **`setPingTimeout`**: If `false`, disables custom ping timeout overrides (`out`/`o`).
 
-### 3. Docker Environment Variables
+### 3. Docker Deployment (Zero-Vulnerability Rust Server)
 
-> [!WARNING]
-> This repository is a static frontend-only project and **does not contain any Docker files** (no `Dockerfile` or `docker-compose.yml`).
-> Any environment variables mentioned in the original README (e.g., `ENABLE_LETSENCRYPT`, `HTTP_PORT`, `SET_SERVER_NAME`) are processed externally by the Nginx container wrapper in the official OpenSpeedTest Docker image, not by this codebase.
+This repository includes a highly optimized, production-ready Docker setup inside the [docker/](docker/) directory:
+
+*   **Zero-Vulnerability Base:** Built using `FROM scratch`, containing only the statically-compiled Rust server binary and the built frontend assets. It has no operating system libraries, shell, or package manager, ensuring a 0-vulnerability footprint.
+*   **Custom Rust Web Server:** A lightweight, memory-efficient HTTP server written in Rust using `axum` and `tokio` that serves assets, handles CORS, and streams incoming upload payloads directly to a black hole to prevent RAM bloating.
+*   **Configuration:** Supported environment variable:
+    *   `HTTP_PORT` (Default: `3000`) - The port the container listens on.
+
+To run the container locally:
+```bash
+docker compose up --build
+```
+
+For detailed configurations and debugging guidelines, see the [Docker README](docker/README.md).
 
 ---
 
