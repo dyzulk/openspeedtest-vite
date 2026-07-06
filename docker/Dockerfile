@@ -1,5 +1,5 @@
 # Stage 1: Build the Vite application
-FROM node:20-alpine AS builder
+FROM node:22-alpine AS builder
 
 # Install pnpm
 RUN npm install -g pnpm@11.9.0
@@ -20,7 +20,7 @@ RUN pnpm run build
 # Stage 2: Serve the application using Nginx
 FROM nginxinc/nginx-unprivileged:stable-alpine
 
-LABEL maintainer "OpenSpeedTest-Vite"
+LABEL maintainer="OpenSpeedTest-Vite"
 
 ENV HTTP_PORT=3000
 ENV CONFIG=/etc/nginx/conf.d/OpenSpeedTest-Server.conf
